@@ -1,0 +1,144 @@
+{% extends 'index.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Charts</title>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+               {% block content %}
+            <!-- Main Content -->
+            <div id="content">
+
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Charts</h1>
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <div class="col-xl-8 col-lg-7">
+
+                            <!-- Area Chart -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Bar Graph Representing Top products and their prices</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-area">
+                                        <canvas id="myChart" class="myChart"></canvas>
+                                    </div>
+                                  <hr>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Donut Chart -->
+                        <div class="col-xl-4 col-lg-5">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Donut Chart Showing Total Sales</h6>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="chart-pie mb-4">
+                                        <canvas id="doughnut-chart"></canvas>
+
+                                    </div>
+
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+    <!--start of bar graph -->
+     <script>
+
+new Chart(document.getElementById("myChart"), {
+    type: 'bar',
+    data: {
+      labels: [{% for item in qs %}'{{ item.name }}',{% endfor %}],
+      datasets: [
+        {
+          label: "price(ksh)",
+          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+          data: [{% for item in qs %}{{ item.price }},{% endfor %}],
+        }
+      ]
+    },
+    options: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'Predicted world population (millions) in 2050'
+      }
+    }
+});
+</script>
+   <!--end of bar graph-->
+
+   <!--start of doughnut graph-->
+   <script>
+new Chart(document.getElementById("doughnut-chart"), {
+type: 'doughnut',
+data: {
+labels: [{% for item in q %}'{{ item.product.name }}',{% endfor %}],
+datasets: [
+{
+label: "sales (ksh)",
+backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+data: [{% for item in q %}{{ item.total_sales }},{% endfor %}]
+}
+]
+},
+options: {
+title: {
+display: true,
+text: 'Predicted world population (millions) in 2050'
+}
+}
+});
+</script>
+   <!--end of doughnut graph-->
+
+   {% endblock %}
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+</body>
+
+</html>

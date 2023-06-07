@@ -1,0 +1,37 @@
+{% extends 'index.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>supply details</title>
+</head>
+<body>
+{% block content %}
+    <div class="container">
+ <div class="row justify-content-center">
+     <div class="col-md-6 border bg-light p-3">
+         <h4 class="text-uppercase font-weight-bold text-center">{{ supplies.supplies}}</h4><hr>
+         <div class="row justify-content-center">
+             <div class="col-2">{{ supplies.quantity }}pieces</div>
+             <div class="col-2">{{ supplies.supply_date }}</div>
+             {% if supplies.supplied %}
+             <div class="col-2"><h5 class="text-success">supplied</h5></div>
+             {% else %}
+             <div class="col-2"> <h5 class="text-danger"> Not supplied</h5></div>
+             {% endif %}
+         </div><hr>
+       <div class="row justify-content-center">
+           <div class="col-md-6">supplied to:{{ supplies.username }}</div>
+           <div class="col-md-6">phone:{{supplies.phone }}</div>
+       </div><hr>
+         <div class="row justify-content-center">
+             <div class="col-md-4"><a class="btn btn-success" href="{% url 'SupplyStatuSupplied'  supplies.id %}">supplied</a></div>
+             <div class="col-md-4"><a class="btn btn-danger" href="{% url 'SupplyStatuNotSupplied' supplies.id %}">not supplied</a></div>
+         </div>
+     </div>
+ </div>
+</div>
+{% endblock %}
+</body>
+</html>

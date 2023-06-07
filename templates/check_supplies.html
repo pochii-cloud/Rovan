@@ -1,0 +1,51 @@
+{% extends 'index.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>supplies</title>
+</head>
+<body>
+{% block content %}
+    <div class="container">
+    <h4 class="text-center border bg-light p-3 "><b>Supply details</b></h4>
+    {% for messages in messages %}
+        <h4 class="text-center border bg-light p-3 text-success font-weight-lighter">{{ messages }}</h4>
+    {% endfor %}
+
+      <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>sn</th>
+            <th>products</th>
+            <th>quantity</th>
+            <th>cost</th>
+            <th>supply_date</th>
+            <th>supplied</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for supplies in supplies %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ supplies.supplies }}</td>
+            <td>{{ supplies.quantity }}</td>
+            <td>{{ supplies.cost }}</td>
+            <td>{{ supplies.supply_date }}</td>
+            {% if supplies.supplied  %}
+            <td>supplied</td>
+            {% else %}
+            <td> not supplied</td>
+            {% endif %}
+        <td><a class="btn btn-success" href="{% url 'SupplyStatus' supplies.id %}">see supplies details</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+{% endblock %}
+</body>
+</html>

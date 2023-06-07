@@ -1,0 +1,45 @@
+{% extends 'index.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>addProduct</title>
+</head>
+<body>
+{% block content %}
+    <div class="container">
+     <h2>Add order form</h2>
+     <form  class="px-4 py-3"  method="post">
+         {% csrf_token %}
+          <div class="form-group">
+             <label for="ordered_by">ordered_by</label>
+             <input type="text" class="form-control" id="ordered_by"  placeholder="ordered_by" name="ordered_by">
+         </div>
+          <div class="form-group">
+             <label for="phone">phone</label>
+             <input type="number" class="form-control" id="phone"  placeholder="phone" name="phone">
+         </div>
+         <div class="form-group">
+             <label for="product">product</label>
+             <input type="text" class="form-control" id="product"  placeholder="enter product" name="product">
+         </div>
+         <div class="form-group">
+             <label for="quantity">quantity</label>
+             <input type="number" class="form-control" id="quantity"  placeholder="enter quantity" name="quantity">
+         </div>
+         <div class="form-group">
+             <label for="cost">cost</label>
+             <input type="number" class="form-control" id="cost"  placeholder="enter cost" name="cost">
+         </div>
+         <div class="form-group">
+             <label for="date">date_ordered</label>
+             <input type="date" class="form-control" id="date"  placeholder="choose date" name="date">
+         </div>
+         <button type="submit" class="btn btn-success">submit</button>
+
+     </form>
+    </div>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,143 @@
+{% extends 'index.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Category Utilities</title>
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            {% block content %}
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-1 text-gray-800">Categories</h1>
+                    {% for messages in messages %}
+                        <div class="container">
+                        <div class="alert alert-danger">{{ messages }}</div>
+                        </div>
+                    {% endfor %}
+
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <!-- First Column -->
+                        <div class="col-lg-4">
+
+                            <!-- Custom Text Color Utilities -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Available categories</h6>
+                                </div>
+                                {% for category in category %}
+                                <div class="card-body">
+                                    <p class="text-gray-100 p-3 bg-dark m-0">{{ category.name }}</p>
+
+                                </div>
+                                {% endfor %}
+                            </div>
+
+
+                        </div>
+
+                        <!-- Second Column -->
+                        <div class="col-lg-4">
+
+                            <!-- Background Gradient Utilities -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Add new Category
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="px-3 py-5 bg-gradient-dark text-white">
+                                        <form class="px-4 py-3" method="post" action="{% url 'AddCategoryView' %}">
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <label for="category">category:</label>
+                                                <input class="form-control" id="category" name="category" type="text" required="required">
+                                            </div>
+                                            <button  class="btn btn-primary" type="submit">add</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Third Column -->
+                        <div class="col-lg-4">
+
+                            <!-- Grayscale Utilities -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Delete Categories
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="p-3 bg-gradient-dark">
+                                        <table class="table table-bordered text-white">
+                                            <thead>
+                                            <tr>
+                                                <th>Sn</th>
+                                                <th>name</th>
+                                                <th>delete</th>
+                                            </tr>
+                                            <tbody>
+                                        {% for category in category %}
+                                             <tr>
+                                                 <td>{{ forloop.counter }}</td>
+                                                 <td>{{ category.name }}</td>
+                                                 <td><a href="{% url 'DeleteCategoryView' category.id %}"><i class="fa fa-trash"></i></a> </td>
+                                             </tr>
+                                        {% endfor %}
+                                             </tbody>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+            {% endblock %}
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+
+</body>
+
+</html>

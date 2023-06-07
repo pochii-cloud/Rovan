@@ -1,0 +1,51 @@
+{% extends 'index.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ordersdetails</title>
+</head>
+<body>
+{% block content %}
+    <div class="container">
+        <h4 class="text-center border bg-light p-3"><b>orders details</b></h4>
+    {% for messages in messages %}
+         <h4 class="text-center border bg-light p-3 text-success font-weight-lighter"> {{ messages }}</h4>
+
+    {% endfor %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>sn</th>
+            <th>products</th>
+            <th>quantity</th>
+            <th>cost</th>
+            <th>order_date</th>
+            <th>delivered</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for orders in orders %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ orders.product }}</td>
+            <td>{{ orders.quantity }}</td>
+            <td>{{ orders.cost }}</td>
+            <td>{{ orders.date_ordered }}</td>
+            {% if orders.delivered  %}
+            <td>delivered</td>
+            {% else %}
+            <td> not delivered</td>
+            {% endif %}
+        <td><a class="btn btn-success" href="{% url 'MarkAsDelivered' orders.id %}">see delivery details</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    </div>
+{% endblock %}
+</body>
+</html>
